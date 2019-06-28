@@ -1,5 +1,5 @@
 const { app, pool } = require("./connent")
-const login = require("./login/")
+const common = require("./modules/api/common")
 
 app.all("*", (req, res, next) => {
   next()
@@ -8,7 +8,7 @@ app.all("*", (req, res, next) => {
 app.all("/", (req, res) => {
 })
 
-app.use("/login", login)
+app.use("/api", common)
 
 app.listen(3000, () => {
   console.log("服务在 3000 端口启用")
