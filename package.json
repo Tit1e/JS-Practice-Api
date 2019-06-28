@@ -9,11 +9,12 @@
   },
   "dependencies": {
     "body-parser": "latest",
-    "mysql": "latest",
     "cookie-parser": "latest",
     "cors": "latest",
     "express": "latest",
-    "multer": "latest"
+    "multer": "latest",
+    "mysql": "latest",
+    "qcloud-cos-sts": "^2.0.7"
   },
   "author": "",
   "license": "ISC"
