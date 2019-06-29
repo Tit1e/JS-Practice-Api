@@ -13,8 +13,7 @@
     "cors": "latest",
     "express": "latest",
     "multer": "latest",
-    "mysql": "latest",
-    "qcloud-cos-sts": "^2.0.7"
+    "mysql": "latest"
   },
   "author": "",
   "license": "ISC"
