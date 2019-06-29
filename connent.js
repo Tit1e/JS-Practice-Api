@@ -12,7 +12,7 @@ app.use(cors()) // 解决跨域
 app.use(bodyParser.json()) // json 请求
 app.use(bodyParser.urlencoded({ extended: false }))// 表单请求
 
-function Result({ code = 1, msg = "", data = {} }) {
+function Result({ code = 200, msg = "", data = {} }) {
   this.code = code
   this.data = data
   this.msg = msg
