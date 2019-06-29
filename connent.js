@@ -31,9 +31,25 @@ const repool = () => {
 }
 repool()
 
+const once = (sql, cb) => {
+  return new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      if (!connection || err) {
+        reject(err)
+      } else {
+        connection.query(sql, (e, r) => {
+          connection.release()
+          resolve({r,e})
+        })
+      }
+    })
+  })
+}
+
 module.exports = {
   pool,
   Result,
   router,
-  app
+  app,
+  once
 }

@@ -1,17 +1,22 @@
 const user = {
-  add: 'insert into user(name, password, admin, status, create_time) values (?, ?, ?, ?, ?)',
-  query(params) {
-    let { name = '', admin = -1, create_time = '' } = params
+  add(params) {
+    let { name, password, admin = 0, status = 1 } = params
+    let create_time = Math.floor(+new Date() / 1000)
+    return `insert into user(name, password, admin, status, create_time) values ('${name}', '${password}', ${admin}, ${status}, ${create_time})`
+  },
+  query(params, getcount = false) {
+    let { name = '', admin = -1, create_time = '', page = 1, page_size = 10 } = params
     let s;
     let e;
     // 如果传了时间，对时间进行处理
     if (create_time) [s, e] = create_time.split(',')
     // 基础 sql
-    let base = 'select * from user where status = 1'
     let sqlName = name === '' ? '' : `and name like '%${name}%'`
-    let sqlAdmin = admin === -1 ? '' : `and admin = ${admin}`
+    let sqlAdmin = +admin === -1 ? '' : `and admin = ${admin}`
     let sqlCreateTime = create_time === '' ? '' : `and create_time between ${s} and ${e}`
-    return [ base, sqlName, sqlAdmin, sqlCreateTime ].join(' ')
+    let sql = [sqlName, sqlAdmin, sqlCreateTime].join(' ')
+    if(getcount) return `select count(*) as count from user where status = 1 ${sql}`
+    return `select * from user where status = 1 ${sql} order by create_time limit ${(page - 1) * page_size}, ${page_size}`
   },
   update(params) {
     let { id, name = '', admin, password } = params
