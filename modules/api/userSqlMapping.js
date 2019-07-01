@@ -16,7 +16,7 @@ const user = {
     let sqlCreateTime = create_time === '' ? '' : `and create_time between ${s} and ${e}`
     let sql = [sqlName, sqlAdmin, sqlCreateTime].join(' ')
     if(getcount) return `select count(*) as count from user where status = 1 ${sql}`
-    return `select * from user where status = 1 ${sql} order by create_time limit ${(page - 1) * page_size}, ${page_size}`
+    return `select id, name, admin, status, create_time from user where status = 1 ${sql} order by create_time limit ${(page - 1) * page_size}, ${page_size}`
   },
   update(params) {
     let { id, name = '', admin, password } = params

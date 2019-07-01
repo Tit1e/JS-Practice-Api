@@ -28,10 +28,11 @@ router.post('/user/query', (req, res) => {
 
 // 添加人员
 router.post('/user/add', (req, res) => {
-  let { name, password } = req.body
+  let { name, password, checkPassword } = req.body
   // 判断必填项
   if (!name) return res.json(new Result({ code: -1, msg: '请填写用户名' }))
   if (!password) return res.json(new Result({ code: -1, msg: '请填写密码' }))
+  if (password !== checkPassword) return res.json(new Result({ code: -1, msg: '请填写密码' }))
   once($sql.add(req.body)).then(r => {
     if (!r.e) {
       res.json(new Result({ msg: '添加成功' }))
