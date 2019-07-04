@@ -15,7 +15,7 @@ router.post('/user/query', async (req, res) => {
   if (!total.e) {
     data.total = total.r[0].count
   } else {
-    return res.json(new Result({ code: 0, data: total.e.sql }))
+    return res.json(new Result({ code: 0, data: total.e }))
   }
 
   res.json(new Result({data: data, msg: '获取成功' }))
@@ -32,7 +32,7 @@ router.post('/user/add', async (req, res) => {
   if (!r.e) {
     res.json(new Result({ msg: '添加成功' }))
   } else {
-    return res.json(new Result({ code: 0, data: r.e.sql }))
+    return res.json(new Result({ code: 0, data: r.e }))
   }
 })
 
@@ -45,7 +45,7 @@ router.get('/user/delete', async (req, res) => {
   if (!r.e) {
     res.json(new Result({ msg: '删除成功' }))
   } else {
-    return res.json(new Result({ code: 0, data: r.e.sql }))
+    return res.json(new Result({ code: 0, data: r.e }))
   }
 })
 
@@ -63,7 +63,7 @@ router.post('/user/update', async (req, res) => {
   if (!r.e) {
     res.json(new Result({ msg: '修改成功' }))
   } else {
-    return res.json(new Result({ code: 0, data: r.e.sql }))
+    return res.json(new Result({ code: 0, data: r.e }))
   }
 })
 
