@@ -8,7 +8,7 @@ const subjects = {
   },
   update(params) {
     let { router, subject = '', id } = params
-    return `update subjects set router = '${router}', subject = '${subject}' where id = ${id}`
+    return `update subjects set subject = '${subject}' where router = '${router}'`
   },
 }
 
