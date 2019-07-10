@@ -9,7 +9,11 @@ const user = {
     let s;
     let e;
     // 如果传了时间，对时间进行处理
-    if (create_time) [s, e] = create_time.split(',')
+    if (create_time) {
+      [s, e] = create_time.split(',')
+      s = Math.floor(+new Date(`${s} 00:00:00`) / 1000)
+      e = Math.floor(+new Date(`${e} 23:59:59`) / 1000)
+    }
     // 基础 sql
     let sqlName = name === '' ? '' : `and name like '%${name}%'`
     let sqlAdmin = +admin === -1 ? '' : `and admin = ${admin}`
